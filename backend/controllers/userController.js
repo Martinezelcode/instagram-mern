@@ -184,6 +184,8 @@ exports.updateProfile = catchAsync(async (req, res, next) => {
     }
 
     if (req.body.avatar !== "") {
+        // debug: log incoming upload info to help troubleshooting avatar updates
+        console.log('DEBUG updateProfile - req.file:', !!req.file, 'req.file.location:', req.file && req.file.location, 'req.body.avatar:', req.body.avatar);
         const user = await User.findById(req.user._id);
 
         await deleteFile(user.avatar);
